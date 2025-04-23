@@ -1,0 +1,119 @@
+/* Add gradient background and images */
+body {
+    background: linear-gradient(to right, #ff7e5f, #feb47b), 
+                url('/Users/rahulsharma/Desktop/PetFeeder/CAT.jpg'), 
+                url('/Users/rahulsharma/Desktop/PetFeeder/DOG.jpg'); /* Replace these URLs with actual image URLs */
+    background-size: cover;
+    background-position: center center, left bottom, right bottom;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make the navbar more colorful */
+.navbar {
+    background: linear-gradient(to right, #56ccf2, #2f80ed); /* Gradient from blue to light blue */
+}
+
+.navbar-brand {
+    color: #fff;
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f39c12 !important; /* Hover color for links */
+}
+
+/* Add some padding and border radius to buttons */
+.btn {
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-size: 18px;
+}
+
+#startBtn {
+    background: #28a745; /* Green for start */
+    border: none;
+}
+
+#stopBtn {
+    background: #dc3545; /* Red for stop */
+    border: none;
+}
+
+#startBtn:hover, #stopBtn:hover {
+    opacity: 0.8; /* Slight opacity effect on hover */
+}
+
+/* Add some spacing and improved styling for modal */
+.modal-content {
+    background: #f7f7f7;
+    color: #333;
+}
+
+.modal-header {
+    background: #2f80ed;
+    color: #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.modal-footer button {
+    background: #56ccf2;
+    border: none;
+}
+
+.modal-footer button:hover {
+    background: #2f80ed;
+}
+
+h1, p {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Center the main content area below the navbar */
+.main-content {
+    flex-grow: 1; /* Allow content to grow and take up remaining space */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column;
+    justify-content: flex-start; /* Align content at the top */
+    align-items: center; /* Align content to the center horizontally */
+    text-align: center; /* Center align text inside the container */
+    padding: 20px; /* Optional: Add padding for spacing */
+    position: relative;
+    top: 5px; /* Optional: shift content down a bit */
+    left: 250px; /* Shift content to the right by 20px */
+}
+
+h1, p {
+    margin: 0; /* Remove any default margins */
+    padding: 5px 0; /* Add some vertical padding for spacing */
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center; /* Horizontally center the buttons */
+    gap: 10px; /* Optional: Space between the buttons */
+}
+
+button {
+    font-size: 18px; /* Adjust button size if needed */
+    padding: 12px 30px; /* Padding for buttons */
+}
+
+
+body {
+    background: url('catdog.webp') no-repeat center center, #f1f1f1;  /* Background color fallback */
+    background-size: cover;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}

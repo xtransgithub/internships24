@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Moisture Monitoring System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dashboard {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+        }
+
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .sensor-card {
+            background-color: var(--background-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .sensor-card:hover {
+            transform: scale(1.05);
+        }
+
+        .sensor-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .sensor-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .status-indicator {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .status-badge.dry {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .status-badge.normal {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .motor-control {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .motor-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .motor-status {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard">
+            <div class="dashboard-header">
+                <h1>Soil Moisture Monitoring</h1>
+            </div>
+
+            <div class="sensor-grid">
+                <div class="sensor-card">
+                    <h3>Soil Moisture</h3>
+                    <div id="moistureValue" class="sensor-value">--</div>
+                </div>
+                <div class="sensor-card">
+                    <h3>Threshold</h3>
+                    <div id="thresholdValue" class="sensor-value">500</div>
+                </div>
+            </div>
+
+            <div class="status-indicator">
+                <div id="statusBadge" class="status-badge">System Status</div>
+            </div>
+
+            <div class="motor-control">
+                <i id="motorIcon" class="fas fa-pause-circle motor-icon"></i>
+                <div id="motorStatus" class="motor-status">Motor Status</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulated sensor data (replace with actual WebSocket/API connection)
+        function updateSensorData() {
+            const moistureValue = document.getElementById('moistureValue');
+            const statusBadge = document.getElementById('statusBadge');
+            const motorIcon = document.getElementById('motorIcon');
+            const motorStatus = document.getElementById('motorStatus');
+
+            // Simulated moisture reading
+            const moistureReading = Math.floor(Math.random() * 1024);
+            const threshold = 500;
+
+            moistureValue.textContent = moistureReading;
+
+            if (moistureReading > threshold) {
+                statusBadge.textContent = 'Status: Dry';
+                statusBadge.classList.remove('normal');
+                statusBadge.classList.add('dry');
+
+                motorIcon.classList.remove('fa-pause-circle');
+                motorIcon.classList.add('fa-sync');
+                motorStatus.textContent = 'Motor: Irrigating';
+            } else {
+                statusBadge.textContent = 'Status: Normal';
+                statusBadge.classList.remove('dry');
+                statusBadge.classList.add('normal');
+
+                motorIcon.classList.remove('fa-sync');
+                motorIcon.classList.add('fa-pause-circle');
+                motorStatus.textContent = 'Motor: Idle';
+            }
+        }
+
+        // Update sensor data every 5 seconds
+        updateSensorData();
+        setInterval(updateSensorData, 5000);
+    </script>
+</body>
+</html>

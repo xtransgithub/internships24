@@ -1,0 +1,154 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e2f;
+    color: #ffffff;
+}
+
+h1, h2 {
+    color: #00bcd4;
+    text-align: center;
+}
+
+.dashboard {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Header Section */
+header {
+    margin-bottom: 30px;
+}
+
+header p {
+    color: #cfd8dc;
+    margin: 10px 0 0;
+}
+
+/* Sensor Data Section */
+.sensor-data {
+    margin: 20px 0;
+}
+
+.sensor-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.sensor-item {
+    background: #2b2b3c;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.sensor-item h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.sensor-item p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* LED Control Section */
+.led-controls {
+    margin: 20px 0;
+}
+
+.led-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
+
+.led-buttons button {
+    background-color: #00bcd4;
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.led-buttons button:hover {
+    background-color: #008ba3;
+}
+
+/* Voice Command Section */
+.voice-command {
+    margin: 20px 0;
+    padding: 20px;
+    background: #2b2b3c;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.voice-command p {
+    font-size: 16px;
+    color: #cfd8dc;
+    margin-top: 10px;
+}
+
+/* Voice Command Switch */
+.voice-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.voice-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #00bcd4;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .sensor-box, .led-buttons {
+        grid-template-columns: 1fr;
+    }
+}

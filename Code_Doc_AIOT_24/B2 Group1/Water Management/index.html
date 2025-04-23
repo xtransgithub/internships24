@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Water Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .status {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .status span {
+            font-weight: bold;
+        }
+        .led-on {
+            color: green;
+        }
+        .led-off {
+            color: red;
+        }
+        .motor-rotating {
+            color: green;
+        }
+        .motor-stopped {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Water Management System</h1>
+        <p>Distance Measured by Ultrasonic Sensor: <strong id="distance">Loading...</strong></p>
+
+        <div class="status">
+            <p>LED Status: <span id="led_status" class="led-off">OFF</span></p>
+        </div>
+
+        <div class="status">
+            <p>Stepper Motor Status: <span id="motor_status" class="motor-stopped">Stopped</span></p>
+        </div>
+
+        <button onclick="toggleLED()">Toggle LED</button>
+        <button onclick="rotateMotor()">Rotate Motor</button>
+        <button onclick="stopMotor()">Stop Motor</button>
+    </div>
+<script>
+        // Function to fetch data from Flask and update the page
+        function updateData() {
+            fetch('/get_data')
+                .then(response => response.json())
+                .then(data => {
+                    // Update the distance, LED status, and motor status
+                    document.getElementById('distance').innerText = data.distance + " cm";
+                    document.getElementById('led_status').innerText = data.led_status;
+                    document.getElementById('motor_status').innerText = data.motor_status;
+
+                    // Change the class of LED and motor based on their status
+                    document.getElementById('led_status').className = data.led_status === "ON" ? "led-on" : "led-off";
+                    document.getElementById('motor_status').className = data.motor_status === "Rotating" ? "motor-rotating" : "motor-stopped";
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Function to toggle LED
+        function toggleLED() {
+            fetch('/toggle_led')
+                .then(response => response.json())
+                .then(() => updateData()); // Refresh data after toggling
+        }
+
+        // Function to rotate motor
+        function rotateMotor() {
+            fetch('/rotate_motor')
+                .then(response => response.json())
+                .then(() => updateData()); // Refresh data after rotating motor
+        }
+// Function to stop motor
+        function stopMotor() {
+            fetch('/stop_motor')
+                .then(response => response.json())
+                .then(() => updateData()); // Refresh data after stopping motor
+        }
+
+        // Update data every 2 seconds for live updates
+        setInterval(updateData, 2000);
+        updateData(); // Initial data fetch when the page loads
+    </script>
+</body>
+</html>

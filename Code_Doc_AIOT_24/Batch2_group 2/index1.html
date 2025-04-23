@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Waste Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            background-size: cover;
+            background-position: center;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        header {
+            background-color: rgba(52, 152, 219, 0.9); /* Bright accent color */
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+        }
+        .container {
+            background: rgba(44, 62, 80, 0.85); /* Darker container */
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Darker shadow */
+            border-radius: 8px;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        .card {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(52, 152, 219, 0.15); /* Lighter blue for cards */
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            margin: 0;
+            color: #ecf0f1; /* Light text for headings */
+        }
+        .card p {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            color: #ecf0f1; /* Light text for card content */
+        }
+        footer {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        .motor-status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #e74c3c; /* Vibrant red for motor status */
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function fetchData() {
+                $.getJSON('/get_data', function(data) {
+                    $('#distance').text(data.distance ? data.distance + ' cm' : 'No reading');
+                    $('#alert_message').text(data.alert_message || 'No alerts');
+                    $('#moisture').text(data.moisture ? data.moisture : 'No reading');
+                });
+            }
+
+            // Fetch motor direction every 1 second
+            function fetchMotorDirection() {
+                $.getJSON('/get_motor_direction', function(data) {
+                    $('#motor_direction').text("Motor is turning: " + data.direction);
+                });
+            }
+
+            setInterval(fetchData, 1000);
+            setInterval(fetchMotorDirection, 1000); // Update motor direction every second
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Smart Waste</h1>
+    </header>
+    <div class="container">
+        <div class="card">
+            <h2>Soil Moisture Level</h2>
+            <p id="moisture">Loading...</p>
+        </div>
+        <div class="card">
+            <h2>Bin Distance</h2>
+            <p id="distance">Loading...</p>
+        </div>
+        <div class="card">
+            <h2>Alerts</h2>
+            <p id="alert_message">Loading...</p>
+        </div>
+
+        <!-- Display motor status -->
+        <div class="motor-status">
+            <p id="motor_direction">Loading motor direction...</p>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 Smart Tech Systems
+    </footer>
+</body>
+</html>

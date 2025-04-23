@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Dashboard</title>
+    <link rel="stylesheet" href="stylish.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <header>
+            <h1>Smart Home Dashboard</h1>
+            <p>Control your home and monitor sensor data in real-time</p>
+        </header>
+
+        <!-- Sensor Data Section -->
+        <section class="sensor-data">
+            <h2>Sensor Readings</h2>
+            <div class="sensor-box">
+                <div class="sensor-item">
+                    <h3>Temperature</h3>
+                    <p id="temperature">-- °C</p>
+                </div>
+                <div class="sensor-item">
+                    <h3>Humidity</h3>
+                    <p id="humidity">-- %</p>
+                </div>
+                <div class="sensor-item">
+                    <h3>Light Status</h3>
+                    <p id="light-status">--</p>
+                </div>
+                <div class="sensor-item">
+                    <h3>Gas Level</h3>
+                    <p id="gas">--</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LED Control Section -->
+        <section class="led-controls">
+            <h2>LED Controls</h2>
+            <div class="led-buttons">
+                <button onclick="toggleLED(2, 1)">Turn ON LED 2</button>
+                <button onclick="toggleLED(2, 0)">Turn OFF LED 2</button>
+                <button onclick="toggleLED(3, 1)">Turn ON LED 3</button>
+                <button onclick="toggleLED(3, 0)">Turn OFF LED 3</button>
+                <button onclick="toggleLED(4, 1)">Turn ON LED 4</button>
+                <button onclick="toggleLED(4, 0)">Turn OFF LED 4</button>
+            </div>
+        </section>
+
+        <!-- Voice Command Section -->
+        <section class="voice-command">
+            <h2>Voice Command Status</h2>
+            <p>Listening for commands...</p>
+        </section>
+    </div>
+
+    <script src="readings.js"></script>
+</body>
+</html>
